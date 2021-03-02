@@ -6,8 +6,10 @@ const MongoStore = require('connect-mongo')(session);
 const app = express();
 const helmet = require('helmet');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 
 const API = require('./routes/API');
+const USERS = require('./routes/users');
 
 app.use(cors());
 
@@ -16,6 +18,8 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
+
+app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session(
   {
@@ -30,20 +34,19 @@ app.use(session(
 
 const PORT = process.env.PORT_WEB || 8090;
 
-const {
-  MONGO_USERNAME,
-  MONGO_PASSWORD,
-  MONGO_HOSTNAME,
-  MONGO_PORT,
-  MONGO_DB
-  
-} = process.env
+const MONGO_USERNAME = 'kazu_backendRest';
+const MONGO_PASSWORD = 'bcsc8vUBUBOu6tcN';
+const MONGO_HOSTNAME = 'cluster0.gejit.mongodb.net';
+const MONGO_DB = 'database';
 
-console.log(MONGO_USERNAME)
+// console.log(MONGO_USERNAME)
 
-url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}?retryWrites=true&w=majority`;
+// url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}?retryWrites=true&w=majority`;
+// url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}?retryWrites=true&w=majority`;
 
-console.log(url)
+var url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}?retryWrites=true&w=majority`
+
+// console.log(url)
 
 const options = {
   useNewUrlParser: true,
@@ -63,6 +66,7 @@ mongoose.connect(url, options)
 });
 
 app.use('/API', API);
+app.use('/API/users', USERS);
 
 app.listen(PORT, function () {
   console.log(`API listen on : ${PORT}!`);

@@ -18,7 +18,10 @@
     "helmet": "^4.4.1",
     "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.11.13",
-    "request": "^2.88.2"
+    "mongoose-unique-validator": "^2.0.3",
+    "request": "^2.88.2",
+    "uuid-token-generator": "^1.0.0"
   }
 }

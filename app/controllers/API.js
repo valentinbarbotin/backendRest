@@ -12,3 +12,7 @@ exports.index = function (req, res) {
 exports.test = function (req, res) {
     res.json({ message: 'Test OK !' });
 };
+
+exports.login = function (req, res) {
+    res.json({ message: 'Login OK !' });
+};
