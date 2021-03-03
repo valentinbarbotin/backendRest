@@ -23,14 +23,13 @@ exports.verifyToken = function (req, res) {
             console.log(err)
         } else {
             if (data != null) {
-                console.log("J'ai trouvé le jeton")
                 Checkmail.findByIdAndDelete(mongoose.Types.ObjectId(data._id), function (err, docs) { 
                     if (err){ 
                         console.log(err) 
                     } 
                     else{ 
                         console.log("Suppresion du jeton : ", data.token);
-                        Users.updateOne({email: data.email}, {active: true}, function (err) {
+                        Users.updateOne({email: data.email}, { $set: { active: true } }, function (err) {
                             if (err) {
                                 console.log(err);
                             } else {
@@ -120,8 +119,15 @@ exports.login = function (req, res) {
     
                                 // console.log("redirect to dashboard")
                                 // res.redirect('/dashboard')
-    
-                                res.json({ message: 'Connection OK', login: true });
+                                var token = jwt.sign(
+                                    { foo: 'bar' },
+                                    'thisIsASecret',
+                                    {
+                                        algorithm: 'HS512',
+                                        expiresIn: '24h'
+                                    }
+                                );
+                                res.json({ message: 'Connection OK', login: true, token: token });
     
                                 // res.status(200).json({
                                 //     userId: data._id,

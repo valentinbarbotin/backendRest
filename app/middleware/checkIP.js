@@ -1,8 +1,8 @@
 module.exports = (req, res, next) => {
     try {
       var ip = req.connection.remoteAddress;
-      console.log("ip");
-      console.log(ip);
+      // console.log("ip");
+      // console.log(ip);
       ip = ip.split(':')[3];
 
       var liste = ['::1','172.22.0.1','85.190.75.217'];
