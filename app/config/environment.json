@@ -1,0 +1,10 @@
+{
+    "env": "dev",
+    "secret": "grosSecret",
+    "port": 8090,
+
+    "MONGO_USERNAME": "kazu_backendRest",
+    "MONGO_PASSWORD": "bcsc8vUBUBOu6tcN",
+    "MONGO_HOSTNAME": "cluster0.gejit.mongodb.net",
+    "MONGO_DB": "database"
+}

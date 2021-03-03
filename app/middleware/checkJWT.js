@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const environment = require("../config/environment");
 
 module.exports = (req, res, next) => {
     try {
@@ -9,7 +10,7 @@ module.exports = (req, res, next) => {
         } else {
             console.log("Token =",req.token);
 
-            jwt.verify(req.token, 'thisIsASecret', function(err, decoded) {
+            jwt.verify(req.token, environment.secret, function(err, decoded) {
                 if (err) {
                     return res.status(403).json({ error: 'Authorization error' });
                 } else {

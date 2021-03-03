@@ -1,5 +1,5 @@
 {
     "verbose": true,
     "watch": ["*.*"],
-    "ext": "js, css, html, sh"
+    "ext": "js, json, css, html, sh"
   }

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
+const environment = require("../config/environment");
 const Users = require('../models/users');
 const Checkmail = require('../models/checkmail');
 const bcrypt = require('bcrypt');
@@ -12,7 +13,6 @@ const TokenGenerator = require('uuid-token-generator');
 exports.index = function (req, res) {
     res.json({ message: 'Hello !' });
 };
-
 
 exports.verifyToken = function (req, res) {
     var data = req.params.token;
@@ -120,8 +120,12 @@ exports.login = function (req, res) {
                                 // console.log("redirect to dashboard")
                                 // res.redirect('/dashboard')
                                 var token = jwt.sign(
-                                    { foo: 'bar' },
-                                    'thisIsASecret',
+                                    {
+                                        email: data.email,
+                                        user: data.user,
+                                        role: data.role,
+                                    },
+                                    environment.secret,
                                     {
                                         algorithm: 'HS512',
                                         expiresIn: '24h'

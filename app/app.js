@@ -2,6 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
+
+const environment = require("./config/environment.json");
+
 // const MongoStore = require('connect-mongo')(session);
 const app = express();
 const helmet = require('helmet');
@@ -38,10 +41,10 @@ app.use(cookieParser());
 
 const PORT = process.env.PORT_WEB || 8090;
 
-const MONGO_USERNAME = 'kazu_backendRest';
-const MONGO_PASSWORD = 'bcsc8vUBUBOu6tcN';
-const MONGO_HOSTNAME = 'cluster0.gejit.mongodb.net';
-const MONGO_DB = 'database';
+const MONGO_USERNAME = environment.MONGO_USERNAME;
+const MONGO_PASSWORD = environment.MONGO_PASSWORD;
+const MONGO_HOSTNAME = environment.MONGO_HOSTNAME;
+const MONGO_DB = environment.MONGO_DB;
 
 // console.log(MONGO_USERNAME)
 
@@ -73,5 +76,5 @@ app.use('/API', API);
 app.use('/API/users', USERS);
 
 app.listen(PORT, function () {
-  console.log(`API listen on : ${PORT}!`);
+  console.log(`API listen on : ${environment.port} ENV=${environment.env}!`);
 })
