@@ -8,6 +8,6 @@ const API = require('../controllers/API');
 
 router.get('', checkIP, checkJWT, API.index );
 // router.get('', checkIP, checkAuthorization, API.index );
-router.get('/test', checkIP, checkJWT, API.test );
+router.get('/test', checkIP, API.test );
 
 module.exports = router;
