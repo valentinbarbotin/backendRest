@@ -20,8 +20,7 @@ exports.test = function (req, res) {
       } catch (err) {
         console.error(err)
       }
-
-    res.json({ message: 'Test OK !' });
+      res.json({ message: 'Test OK !' });
 };
 
 exports.login = function (req, res) {
