@@ -95,7 +95,7 @@ exports.login = function (req, res) {
     
     var nomEmail = req.body.nomEmail;
     var password = req.body.password;
-    
+
     Users.findOne( { $or: [{email: nomEmail},{user: nomEmail}]} ).exec(function (err, data) {
         //account.findOne({}).exec(function (err, data) {
             if (err) {
